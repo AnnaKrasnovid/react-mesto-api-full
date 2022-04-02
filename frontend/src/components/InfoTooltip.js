@@ -11,7 +11,7 @@ function InfoTooltip(props) {
             <div className="popup__content" onClick={e => { e.stopPropagation() }}>
                 <button className="popup__close hover-button" type="button" onClick={props.onClose}></button>
                 <div className="popup__info-tooltip">
-                    <img className="popup__picture" src={picture} />
+                    <img className="popup__picture" src={picture} alt="Результат"/>
                     <h3 className="popup__title">{title}</h3>
                 </div>
             </div>
