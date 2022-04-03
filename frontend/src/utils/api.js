@@ -7,7 +7,7 @@ export class Api {
     getInitialCards(token) {
       return fetch(`${this._baseUrl}/cards`, {
         headers: {
-          authorization: `${token}`,
+          authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }    
       })
@@ -17,7 +17,7 @@ export class Api {
     getProfileInfo(token) {
       return fetch(`${this._baseUrl}/users/me`, {      
         headers: {
-          authorization: `${token}`,
+          authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         } 
       })
@@ -28,7 +28,7 @@ export class Api {
       return fetch (`${this._baseUrl}/users/me`, {
         method: 'PATCH',
         headers: {
-          authorization: `${token}`,
+          authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         },    
         body: JSON.stringify({
@@ -43,7 +43,7 @@ export class Api {
       return fetch (`${this._baseUrl}/cards`, {
         method: 'POST',
         headers: {
-          authorization: `${token}`,
+          authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         },    
         body: JSON.stringify({
@@ -58,7 +58,7 @@ export class Api {
       return fetch (`${this._baseUrl}/users/me/avatar`, {        
         method: 'PATCH',
         headers: {
-          authorization: `${token}`,
+          authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         },    
         body: JSON.stringify({
@@ -73,7 +73,7 @@ export class Api {
         return fetch (`${this._baseUrl}/cards/${id}/likes`, {
           method: 'PUT',
           headers: {
-            authorization: `${token}`,
+            authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
         })
@@ -82,7 +82,7 @@ export class Api {
         return fetch (`${this._baseUrl}/cards/${id}/likes`, {
           method: 'DELETE',
           headers: {
-            authorization: `${token}`,
+            authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
         })
@@ -94,7 +94,7 @@ export class Api {
       return fetch (`${this._baseUrl}/cards/${data._id}`, {
         method: 'DELETE',
         headers: {
-          authorization: `${token}`,
+          authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       })
