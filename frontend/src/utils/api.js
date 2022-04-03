@@ -85,8 +85,10 @@ export class Api {
     }
   }
 
+  const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000'; 
+
   const api = new Api({
-    baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
+    baseUrl: BASE_URL,
     headers: {
       'Content-Type': 'application/json'
     }
