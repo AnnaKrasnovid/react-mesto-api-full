@@ -1,5 +1,3 @@
-import { BASE_URL } from './constants';
-
 export class Api {
     constructor({baseUrl, headers}) {
       this._baseUrl = baseUrl;
@@ -88,7 +86,7 @@ export class Api {
   }
 
   const api = new Api({
-    baseUrl: BASE_URL,
+    baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
     headers: { 
       'Content-Type': 'application/json'
     }
