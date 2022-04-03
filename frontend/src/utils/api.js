@@ -1,4 +1,4 @@
-import BASE_URL from './constants';
+import { BASE_URL } from './constants';
 
 export class Api {
     constructor({baseUrl, headers}) {
