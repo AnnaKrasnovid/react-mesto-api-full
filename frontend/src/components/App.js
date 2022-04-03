@@ -52,6 +52,20 @@ function App() {
       })
   }
 
+  function handleRegistration(data) {
+    auth.register(data)
+      .then((data) => {
+        console.log(data)
+        setSuccessSignUp(true)
+        history.push("/signin")
+      })
+      .catch(err => {
+        setSuccessSignUp(false)
+        console.log(err)
+      })
+      .finally(() => setInfoTooltipOpen(true))
+  }
+
   React.useEffect(() => {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
@@ -175,20 +189,6 @@ function App() {
       .finally(() => {
         setIsLoading(false)
       })
-  }
-
-  function handleRegistration(data) {
-    auth.register(data)
-      .then((data) => {
-        console.log(data)
-        setSuccessSignUp(true)
-        history.push("/signin")
-      })
-      .catch(err => {
-        setSuccessSignUp(false)
-        console.log(err)
-      })
-      .finally(() => setInfoTooltipOpen(true))
   }
 
   return (
