@@ -7,7 +7,7 @@ const { createUser, login } = require('./controllers/users');
 const errorHandler = require('./middlewares/middlewares');
 const ErrorNotFound = require('./error/ErrorNotFound');
 const validation = require('./middlewares/validation');
-const auth = require('./middlewares/auth');
+// const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -36,8 +36,11 @@ app.use(requestLogger);
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 }); */
-app.use('/users', auth, require('./routes/users'));
-app.use('/cards', auth, require('./routes/cards'));
+// app.use('/users', auth, require('./routes/users'));
+// app.use('/cards', auth, require('./routes/cards'));
+
+app.use('/users', require('./routes/users'));
+app.use('/cards', require('./routes/cards'));
 
 app.post('/signin', validation.checkLogin, login);
 app.post('/signup', validation.checkUserCreate, createUser);
