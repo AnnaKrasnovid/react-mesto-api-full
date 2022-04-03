@@ -31,11 +31,11 @@ app.use(cors({
 
 app.use(requestLogger);
 
-app.get('/crash-test', () => { // после ревью удалить
+/* app.get('/crash-test', () => { // после ревью удалить
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-});
+}); */
 
 app.post('/signin', validation.checkLogin, login);
 app.post('/signup', validation.checkUserCreate, createUser);
