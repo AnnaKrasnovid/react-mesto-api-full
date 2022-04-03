@@ -1,27 +1,36 @@
 export class Api {
-    constructor({baseUrl, headers}) {
+    constructor({baseUrl/*, headers*/}) {
       this._baseUrl = baseUrl;
-      this._headers = headers;
+      // this._headers = headers;
     }
-  
-    getInitialCards() {
+
+    getInitialCards(token) {
       return fetch(`${this._baseUrl}/cards`, {
-        headers: this._headers
+        headers: {
+          authorization: `${token}`,
+          'Content-Type': 'application/json'
+        }    
       })
       .then(this._checkResponseStatus)
     }
   
-    getProfileInfo() {
+    getProfileInfo(token) {
       return fetch(`${this._baseUrl}/users/me`, {      
-        headers: this._headers
+        headers: {
+          authorization: `${token}`,
+          'Content-Type': 'application/json'
+        } 
       })
       .then(this._checkResponseStatus)
     }
   
-    setProfileInfo(data) {
+    setProfileInfo(data, token) {
       return fetch (`${this._baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: this._headers,    
+        headers: {
+          authorization: `${token}`,
+          'Content-Type': 'application/json'
+        },    
         body: JSON.stringify({
           name: data.name,
           about: data.about          
@@ -30,10 +39,13 @@ export class Api {
       .then(this._checkResponseStatus)
     }
   
-    setNewCard(data) {
+    setNewCard(data, token) {
       return fetch (`${this._baseUrl}/cards`, {
         method: 'POST',
-        headers: this._headers,    
+        headers: {
+          authorization: `${token}`,
+          'Content-Type': 'application/json'
+        },    
         body: JSON.stringify({
           name: data.title,
           link: data.link
@@ -42,10 +54,13 @@ export class Api {
       .then(this._checkResponseStatus)
     }
   
-    setUserAvatar(data) {
+    setUserAvatar(data, token) {
       return fetch (`${this._baseUrl}/users/me/avatar`, {        
         method: 'PATCH',
-        headers: this._headers,    
+        headers: {
+          authorization: `${token}`,
+          'Content-Type': 'application/json'
+        },    
         body: JSON.stringify({
           avatar: data.avatar
         })
@@ -53,26 +68,35 @@ export class Api {
       .then(this._checkResponseStatus)
     }
   
-    changeLikeCardStatus(id, isLiked) {
+    changeLikeCardStatus(id, isLiked, token) {
       if(isLiked) {
         return fetch (`${this._baseUrl}/cards/${id}/likes`, {
           method: 'PUT',
-          headers: this._headers,
+          headers: {
+            authorization: `${token}`,
+            'Content-Type': 'application/json'
+          },
         })
         .then(this._checkResponseStatus)
       } else {
         return fetch (`${this._baseUrl}/cards/${id}/likes`, {
           method: 'DELETE',
-          headers: this._headers,
+          headers: {
+            authorization: `${token}`,
+            'Content-Type': 'application/json'
+          },
         })
         .then(this._checkResponseStatus)
       }      
     }
   
-    removeCard(data) {
+    removeCard(data, token) {
       return fetch (`${this._baseUrl}/cards/${data._id}`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: {
+          authorization: `${token}`,
+          'Content-Type': 'application/json'
+        }
       })
       .then(this._checkResponseStatus)
     }
@@ -87,9 +111,6 @@ export class Api {
 
   const api = new Api({
     baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
-    headers: {
-      'Content-Type': 'application/json'
-    }
   })
 
   export default api;

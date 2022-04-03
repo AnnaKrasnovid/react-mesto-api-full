@@ -36,12 +36,11 @@ app.use(requestLogger);
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 }); */
+app.use('/users', auth, require('./routes/users'));
+app.use('/cards', auth, require('./routes/cards'));
 
 app.post('/signin', validation.checkLogin, login);
 app.post('/signup', validation.checkUserCreate, createUser);
-
-app.use('/users', auth, require('./routes/users'));
-app.use('/cards', auth, require('./routes/cards'));
 
 app.use((req, res, next) => {
   next(new ErrorNotFound('Not found'));
