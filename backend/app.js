@@ -24,6 +24,12 @@ app.use(requestLogger);
 app.use('/users', auth, require('./routes/users'));
 app.use('/cards', auth, require('./routes/cards'));
 
+app.get('/crash-test', () => { // после ревью удалить
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signin', validation.checkLogin, login);
 app.post('/signup', validation.checkUserCreate, createUser);
 
