@@ -36,6 +36,47 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const history = useHistory();
 
+  function handleLogin(data) {
+    auth.authorize(data)
+      .then((res) => {
+        localStorage.setItem('token', res.token);
+        setLoggedIn(true);
+        history.push("/main");
+        setUserEmail(data.email)
+        //console.log(data)
+      })
+      .catch(err => {
+        setInfoTooltipOpen(true)
+        setSuccessSignUp(false)
+        console.log(err)
+      })
+  }
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      auth.checkToken(token)
+        .then((data) => {
+          setLoggedIn(true)
+          setUserEmail(data.data.email)
+         //console.log(data.data.email)
+        })
+        .catch((err) => console.log(err))
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      history.push("/main");
+    }
+  }, [loggedIn, history])
+
+  function logout() {
+    setLoggedIn(false);
+    localStorage.removeItem('token');
+    setUserEmail('')
+  }
+
   React.useEffect(() => {
     Promise.all([api.getProfileInfo(), api.getInitialCards()])
       .then(([userData, cards]) => {
@@ -148,47 +189,6 @@ function App() {
         console.log(err)
       })
       .finally(() => setInfoTooltipOpen(true))
-  }
-
-  function handleLogin(data) {
-    auth.authorize(data)
-      .then((res) => {
-        localStorage.setItem('token', res.token);
-        setLoggedIn(true);
-        history.push("/main");
-        setUserEmail(data.email)
-        //console.log(data)
-      })
-      .catch(err => {
-        setInfoTooltipOpen(true)
-        setSuccessSignUp(false)
-        console.log(err)
-      })
-  }
-
-  React.useEffect(() => {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
-      auth.checkToken(token)
-        .then((data) => {
-          setLoggedIn(true)
-          setUserEmail(data.data.email)
-         //console.log(data.data.email)
-        })
-        .catch((err) => console.log(err))
-    }
-  }, [])
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      history.push("/main");
-    }
-  }, [loggedIn, history])
-
-  function logout() {
-    setLoggedIn(false);
-    localStorage.removeItem('token');
-    setUserEmail('')
   }
 
   return (
