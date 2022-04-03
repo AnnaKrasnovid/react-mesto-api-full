@@ -21,9 +21,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true })
 app.use(cors());
 app.use(requestLogger);
 
-app.use('/users', auth, require('./routes/users'));
-app.use('/cards', auth, require('./routes/cards'));
-
 app.get('/crash-test', () => { // после ревью удалить
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -32,6 +29,9 @@ app.get('/crash-test', () => { // после ревью удалить
 
 app.post('/signin', validation.checkLogin, login);
 app.post('/signup', validation.checkUserCreate, createUser);
+
+app.use('/users', auth, require('./routes/users'));
+app.use('/cards', auth, require('./routes/cards'));
 
 app.use((req, res, next) => {
   next(new ErrorNotFound('Not found'));
