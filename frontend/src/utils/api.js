@@ -86,9 +86,9 @@ export class Api {
   }
 
   const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-32',
+    baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
     headers: {
-      authorization: '894bd372-66b3-459f-9fd3-803617b1d7d0',
+     // authorization: '894bd372-66b3-459f-9fd3-803617b1d7d0',
       'Content-Type': 'application/json'
     }
   })

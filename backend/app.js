@@ -18,7 +18,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true });
-app.use(cors());
+
+const allowedCors = [
+  'https://api.krasnovid.students.nomoredomains.work',
+  'https://krasnovid.students.nomoredomains.work',
+  'http://localhost:3000',
+];
+
+app.use(cors({
+  origin: allowedCors,
+}));
+
 app.use(requestLogger);
 
 app.get('/crash-test', () => { // после ревью удалить
