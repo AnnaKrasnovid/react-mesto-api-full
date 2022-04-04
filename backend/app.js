@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -23,14 +23,18 @@ mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true })
 /* const allowedCors = [
   'https://api.krasnovid.students.nomoredomains.work',
   'https://krasnovid.students.nomoredomains.work',
-  'http://localhost:3000',
-];
+  'https://localhost:3001',
+]; */
 
 app.use(cors({
-  origin: allowedCors,
-})); */
+  origin: [
+    'https://api.krasnovid.students.nomoredomains.work',
+    'https://krasnovid.students.nomoredomains.work',
+    'https://localhost:3001',
+  ],
+}));
 
-app.use(cors());
+// app.use(cors());
 
 app.use(requestLogger);
 
