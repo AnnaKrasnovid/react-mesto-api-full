@@ -26,15 +26,15 @@ mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true })
   'https://localhost:3001',
 ]; */
 
-app.use(cors({
+/* app.use(cors({
   origin: [
     'https://api.krasnovid.students.nomoredomains.work',
     'https://krasnovid.students.nomoredomains.work',
     'https://localhost:3001',
   ],
-}));
+})); */
 
-// app.use(cors());
+app.use(cors());
 
 app.use(requestLogger);
 

@@ -88,12 +88,12 @@ export class Api {
   const api = new Api({
     baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
     headers: { 
-      'Accept':  'application/json',
+      // authorization:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjRhN2NlNDYwMTQ0MzE4YTFhMWI1NDAiLCJpYXQiOjE2NDkwNjE0OTEsImV4cCI6MTY0OTY2NjI5MX0.9R-KnEOedzeWc8RPaNWc9DryyZMHNoW_YCsf4imI8rk',
       'Content-Type': 'application/json',
     }
   })
 
-  /* const api = new Api({
+  /*const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-32',
     headers: { 
       authorization: '894bd372-66b3-459f-9fd3-803617b1d7d0', 

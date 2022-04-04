@@ -36,6 +36,12 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const history = useHistory();
 
+  /* function tokenCheck() {
+    if(localStorage.getItem('token')) {
+      return setLoggedIn(true)
+    } 
+  }*/
+
   function handleLogin(data) {
     auth.authorize(data)
       .then((res) => {
@@ -43,7 +49,7 @@ function App() {
         setLoggedIn(true);
         history.push("/main");
         setUserEmail(data.email)
-        //console.log(data)
+        console.log(res.token)
       })
       .catch(err => {
         setInfoTooltipOpen(true)
