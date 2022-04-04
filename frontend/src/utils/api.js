@@ -88,7 +88,7 @@ export class Api {
   const api = new Api({
     baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
     headers: { 
-      // authorization:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjRhN2NlNDYwMTQ0MzE4YTFhMWI1NDAiLCJpYXQiOjE2NDkwNjE0OTEsImV4cCI6MTY0OTY2NjI5MX0.9R-KnEOedzeWc8RPaNWc9DryyZMHNoW_YCsf4imI8rk',
+      authorization: `Bearer ${ localStorage.getItem('token')}`,
       'Content-Type': 'application/json',
     }
   })
