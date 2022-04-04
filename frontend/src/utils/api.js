@@ -4,16 +4,22 @@ export class Api {
       this._headers = headers;
     }
 
-    getInitialCards() {
+    getInitialCards(token) {
       return fetch(`${this._baseUrl}/cards`, {
-        headers: this._headers
+        headers: {
+          ...this._headers,//
+          'Authorization': `Bearer ${token}`//
+        },
       })
       .then(this._checkResponseStatus)
     }
   
-    getProfileInfo() {
+    getProfileInfo(token) {
       return fetch(`${this._baseUrl}/users/me`, {      
-        headers: this._headers
+        headers: {
+          ...this._headers,//
+          'Authorization': `Bearer ${token}`//
+        },
       })
       .then(this._checkResponseStatus)
     }
@@ -30,10 +36,13 @@ export class Api {
       .then(this._checkResponseStatus)
     }
   
-    setNewCard(data) {
+    setNewCard(data, token) {
       return fetch (`${this._baseUrl}/cards`, {
         method: 'POST',
-        headers: this._headers,    
+        headers: {
+          ...this._headers,//
+          'Authorization': `Bearer ${token}`//
+        },    
         body: JSON.stringify({
           name: data.title,
           link: data.link
@@ -42,10 +51,13 @@ export class Api {
       .then(this._checkResponseStatus)
     }
   
-    setUserAvatar(data) {
+    setUserAvatar(data, token) {
       return fetch (`${this._baseUrl}/users/me/avatar`, {        
         method: 'PATCH',
-        headers: this._headers,    
+        headers: {
+          ...this._headers,//
+          'Authorization': `Bearer ${token}`//
+        },
         body: JSON.stringify({
           avatar: data.avatar
         })
@@ -69,10 +81,13 @@ export class Api {
       }      
     }
   
-    removeCard(data) {
+    removeCard(data, token) {
       return fetch (`${this._baseUrl}/cards/${data._id}`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: {
+          ...this._headers,//
+          'Authorization': `Bearer ${token}`//
+        },
       })
       .then(this._checkResponseStatus)
     }
@@ -83,22 +98,21 @@ export class Api {
       }      
       return Promise.reject(`Ошибка: ${res.status}`)
     }
+}
+
+const api = new Api({
+  baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
+  headers: { 
+    //authorization: `Bearer ${localStorage.getItem('token')}`,
+    'Content-Type': 'application/json',
   }
+})
+ /*const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-32',
+  headers: { 
+    authorization: '894bd372-66b3-459f-9fd3-803617b1d7d0', 
+    'Content-Type': 'application/json'
+  } 
+})*/
 
-  const api = new Api({
-    baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
-    headers: { 
-      authorization: `Bearer ${ localStorage.getItem('token')}`,
-      'Content-Type': 'application/json',
-    }
-  })
-
-  /*const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-32',
-    headers: { 
-      authorization: '894bd372-66b3-459f-9fd3-803617b1d7d0', 
-      'Content-Type': 'application/json'
-    } 
-  })*/
-
-  export default api;
+export default api;
