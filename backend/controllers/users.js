@@ -9,7 +9,7 @@ const ErrorValidation = require('../error/ErrorValidation');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users })) // { data: users }
+    .then((users) => res.send(users)) // { data: users }
     .catch((err) => {
       next(err);
     });
@@ -30,13 +30,13 @@ module.exports.createUser = (req, res, next) => {
       return bcrypt.hash(password, 10);
     })
     .then((hash) => User.create({ name, about, avatar, email, password: hash })) // { name, about, avatar, email, password: hash }
-    .then((user) => res.send({
+    .then((user) => res.send(user.name, user.about, user.avatar, user.email, user._id))/* {
       name: user.name,
       about: user.about,
       avatar: user.avatar,
       email: user.email,
       _id: user._id,
-    }))
+    } */
     .catch((err) => {
       next(err);
     });
@@ -47,7 +47,7 @@ module.exports.getUsersId = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь не найден');
     })
-    .then((user) => res.send({ data: user })) // { data: user }
+    .then((user) => res.send(user)) // { data: user }
     .catch((err) => {
       next(err);
     });
@@ -59,7 +59,7 @@ module.exports.updateUserInfo = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь с таким id не найден');
     })
-    .then((users) => res.send({ data: users })) // { data: users }
+    .then((users) => res.send(users)) // { data: users }
     .catch((err) => {
       next(err);
     });
@@ -71,7 +71,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь с таким id не найден');
     })
-    .then((users) => res.send({ data: users })) // { data: users }
+    .then((users) => res.send(users)) // { data: users }
     .catch((err) => {
       next(err);
     });
@@ -95,7 +95,7 @@ module.exports.getCurrentUsers = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь не найден');
     })
-    .then((user) => res.send({ data: user })) // { data: user }
+    .then((user) => res.send(user)) // { data: user }
     .catch((err) => {
       next(err);
     });
