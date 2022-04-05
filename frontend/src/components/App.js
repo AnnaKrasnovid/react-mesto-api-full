@@ -34,7 +34,6 @@ function App() {
   const [isSuccessSignUp, setSuccessSignUp] = React.useState(false);  
   const [userEmail, setUserEmail] = React.useState('');
   const [loggedIn, setLoggedIn] = React.useState(false);
-  //const [token, setToken] = React.useState('');
   const history = useHistory();
 
   const token = localStorage.getItem('token');
@@ -46,10 +45,7 @@ function App() {
         setLoggedIn(true);
         history.push("/main");
         setUserEmail(data.email)
-       // console.log(token)//старый
-        //setToken(res.token)
-        //console.log(token)//старый
-        console.log(res.token)//новый
+        console.log(res.token)
       })
       .catch(err => {
         setInfoTooltipOpen(true)
@@ -73,8 +69,8 @@ function App() {
   }
 
    React.useEffect(() => {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
+    if (localStorage.getItem('token')) { // 
+       const token = localStorage.getItem('token');
       auth.checkToken(token)
         .then((data) => {
           setLoggedIn(true)
@@ -103,7 +99,7 @@ function App() {
       Promise.all([api.getProfileInfo(token), api.getInitialCards(token)])
       .then(([userData, cards]) => {
         setCurrentUser(userData)
-        console.log(`Текущий пользователь ${userData._id}`)
+        //console.log(`Текущий пользователь ${userData._id}`)
         setCards(cards)
         console.log(cards)
       })
@@ -167,9 +163,8 @@ function App() {
   }
 
   function handleUpdateAvatar(data) {
-    const token = localStorage.getItem('token'); //
     setIsLoading(true)
-    api.setUserAvatar(data, token) //
+    api.setUserAvatar(data, token) 
       .then((data) => {
         setCurrentUser(data)
         closeAllPopups()
@@ -180,9 +175,8 @@ function App() {
       })
   }
 
-  function handleCardDelete(e) { //работает
+  function handleCardDelete(e) { 
     e.preventDefault();
-    //const token = localStorage.getItem('token');//
     api.removeCard(cardDelete, token)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== cardDelete._id))
@@ -191,7 +185,7 @@ function App() {
       .catch(err => { console.log(err) })
   }
 
-  function handleCardLike(card) { // работает
+  function handleCardLike(card) { 
     const isLiked = card.likes.some(item => item === currentUser._id); // item => item._id === currentUser._id
  
     api.changeLikeCardStatus(card._id, !isLiked, token)
@@ -202,7 +196,6 @@ function App() {
   }
 
   function handleAddPlaceSubmit(newCard) {
-    //const token = localStorage.getItem('token');//работает
     setIsLoading(true)
     api.setNewCard(newCard, token)
       .then((newCard) => {
