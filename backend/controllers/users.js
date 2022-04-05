@@ -29,8 +29,14 @@ module.exports.createUser = (req, res, next) => {
       }
       return bcrypt.hash(password, 10);
     })
-    .then((hash) => User.create({ name, about, avatar, email, password: hash })) // { name, about, avatar, email, password: hash }
-    .then((user) => res.send(user.name, user.about, user.avatar, user.email, user._id))/* {
+    .then((hash) => User.create({ name, about, avatar, email, password: hash }))
+    .then((user) => res.send({
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      email: user.email,
+      _id: user._id,
+    }))/* { //user.name, user.about, user.avatar, user.email, user._id
       name: user.name,
       about: user.about,
       avatar: user.avatar,
