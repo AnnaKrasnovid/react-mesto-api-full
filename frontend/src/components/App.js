@@ -100,18 +100,18 @@ function App() {
   React.useEffect(() => {
     if (loggedIn){
       const token = localStorage.getItem('token');
-      /*Promise.all([api.getProfileInfo(token), api.getInitialCards(token)])
+      Promise.all([api.getProfileInfo(token), api.getInitialCards(token)])
       .then(([userData, cards]) => {
         setCurrentUser(userData)
-        console.log(userData)
+        console.log(`Текущий пользователь ${userData._id}`)
         setCards(cards)
         console.log(cards)
       })
-      .catch(err => { console.log(err) })*/
-      api.getProfileInfo(token)
+      .catch(err => { console.log(err) })
+      /*api.getProfileInfo(token)
         .then((data) => { 
           setCurrentUser(data)
-          console.log(data)
+          console.log(data._id)
         }) 
         .catch(err => {console.log(err)})
       api.getInitialCards(token) 
@@ -120,7 +120,7 @@ function App() {
         console.log(data) 
       }) 
       .catch(err => {console.log(err)}) 
-    }
+    }*/}
   }, [loggedIn])
 
   function handleEditAvatarClick() {
@@ -192,8 +192,8 @@ function App() {
   }
 
   function handleCardLike(card) { // работает
-    const isLiked = card.likes.some(item => item._id === currentUser._id);
-
+    const isLiked = card.likes.some(item => item === currentUser._id); // item => item._id === currentUser._id
+ 
     api.changeLikeCardStatus(card._id, !isLiked, token)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));

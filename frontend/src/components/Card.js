@@ -3,9 +3,9 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Card (props){
   const currentUser = React.useContext(CurrentUserContext)
-  const isOwn = props.card.owner._id === currentUser._id; 
+  const isOwn = props.card.owner === currentUser._id; //props.card.owner._id === currentUser._id; 
   const cardDeleteButtonClassName = (`element__delete-button  ${isOwn ? 'element__delete-button_visible' : ''} hover-button`);
-  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+  const isLiked = props.card.likes.find(i => i === currentUser._id); //i => i._id === currentUser._id
   const cardLikeButtonClassName = `element__like ${isLiked ? 'element__like_active' : ''}`
 
   function handleClick() {
@@ -14,6 +14,10 @@ function Card (props){
 
   function handleLikeClick() {
     props.onCardLike(props.card)
+    console.log(props.card)
+    console.log(`Владелец карточки ${props.card.owner}`)
+    console.log(`Текущий пользователь ${currentUser._id}`)
+    console.log(`Лайки пользователей ${props.card.likes}`)
   }
 
   function handleDeleteClick() {    
