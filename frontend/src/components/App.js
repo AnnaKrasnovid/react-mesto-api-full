@@ -14,7 +14,6 @@ import DeleteCardPopup from './DeleteCardPopup';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
-//import register from '../utils/auth';
 import InfoTooltip from './InfoTooltip';
 import * as auth from '../utils/auth';
 
@@ -75,7 +74,6 @@ function App() {
         .then((data) => {
           setLoggedIn(true)
           setUserEmail(data.email) //data.data.email
-         //console.log(data.data.email)
         })
         .catch((err) => console.log(err))
     }
@@ -96,26 +94,13 @@ function App() {
   React.useEffect(() => {
     if (loggedIn){
       const token = localStorage.getItem('token');
-      /* Promise.all([api.getProfileInfo(token), api.getInitialCards(token)])
+       Promise.all([api.getProfileInfo(token), api.getInitialCards(token)])
       .then(([userData, cards]) => {
         setCurrentUser(userData)
-        //console.log(`Текущий пользователь ${userData._id}`)
         setCards(cards)
         console.log(cards)
       })
-      .catch(err => { console.log(err) })*/
-      api.getProfileInfo(token)
-        .then((data) => { 
-          setCurrentUser(data)
-          console.log(data)
-        }) 
-        .catch(err => {console.log(err)})
-      api.getInitialCards(token) 
-        .then((data) => { 
-        setCards(data)
-        console.log(data) 
-      }) 
-      .catch(err => {console.log(err)}) 
+      .catch(err => { console.log(err) })
     }
   }, [loggedIn])
 

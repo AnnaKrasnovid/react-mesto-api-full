@@ -20,29 +20,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true });
 
-/* const allowedCors = [
-  'https://api.krasnovid.students.nomoredomains.work',
-  'https://krasnovid.students.nomoredomains.work',
-  'https://localhost:3001',
-]; */
-
-/* app.use(cors({
+app.use(cors({
   origin: [
     'https://api.krasnovid.students.nomoredomains.work',
     'https://krasnovid.students.nomoredomains.work',
     'https://localhost:3001',
   ],
-})); */
+}));
 
-app.use(cors());
+// app.use(cors()); // все адреса
 
 app.use(requestLogger);
 
-/* app.get('/crash-test', () => { // после ревью удалить
+app.get('/crash-test', () => { // после ревью удалить
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-}); */
+});
 
 app.use('/users', auth, require('./routes/users'));
 app.use('/cards', auth, require('./routes/cards'));

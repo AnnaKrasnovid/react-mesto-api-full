@@ -7,8 +7,8 @@ export class Api {
     getInitialCards(token) {
       return fetch(`${this._baseUrl}/cards`, {
         headers: {
-          ...this._headers,//
-          'Authorization': `Bearer ${token}`//
+          ...this._headers,
+          'Authorization': `Bearer ${token}`,
         },
       })
       .then(this._checkResponseStatus)
@@ -17,8 +17,8 @@ export class Api {
     getProfileInfo(token) {
       return fetch(`${this._baseUrl}/users/me`, {      
         headers: {
-          ...this._headers,//
-          'Authorization': `Bearer ${token}`//
+          ...this._headers,
+          'Authorization': `Bearer ${token}`,
         },
       })
       .then(this._checkResponseStatus)
@@ -28,12 +28,12 @@ export class Api {
       return fetch (`${this._baseUrl}/users/me`, {
         method: 'PATCH',
         headers: {
-          ...this._headers,//
-          'Authorization': `Bearer ${token}`//
+          ...this._headers,
+          'Authorization': `Bearer ${token}`,
         },    
         body: JSON.stringify({
           name: data.name,
-          about: data.about          
+          about: data.about,         
         })        
       })      
       .then(this._checkResponseStatus)
@@ -58,8 +58,8 @@ export class Api {
       return fetch (`${this._baseUrl}/users/me/avatar`, {        
         method: 'PATCH',
         headers: {
-          ...this._headers,//
-          'Authorization': `Bearer ${token}`//
+          ...this._headers,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           avatar: data.avatar
@@ -111,8 +111,7 @@ export class Api {
 
 const api = new Api({
   baseUrl: 'https://api.krasnovid.students.nomoredomains.work',
-  headers: { 
-    //authorization: `Bearer ${localStorage.getItem('token')}`,
+  headers: {
     'Content-Type': 'application/json',
   }
 })

@@ -36,13 +36,7 @@ module.exports.createUser = (req, res, next) => {
       avatar: user.avatar,
       email: user.email,
       _id: user._id,
-    }))/* { //user.name, user.about, user.avatar, user.email, user._id
-      name: user.name,
-      about: user.about,
-      avatar: user.avatar,
-      email: user.email,
-      _id: user._id,
-    } */
+    }))
     .catch((err) => {
       next(err);
     });
@@ -88,7 +82,7 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, /* 'some-secret-key' */ NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' }); /* 'some-secret-key' */
       res.send({ token });
     })
     .catch((err) => {
