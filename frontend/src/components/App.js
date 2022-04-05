@@ -69,7 +69,7 @@ function App() {
   }
 
    React.useEffect(() => {
-    if (localStorage.getItem('token')) { // 
+    if (localStorage.getItem('token')) { 
        const token = localStorage.getItem('token');
       auth.checkToken(token)
         .then((data) => {
