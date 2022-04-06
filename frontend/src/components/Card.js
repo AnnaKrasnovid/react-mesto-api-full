@@ -14,10 +14,10 @@ function Card (props){
 
   function handleLikeClick() {
     props.onCardLike(props.card)
-    console.log(props.card)
+    /*console.log(props.card)
     console.log(`Владелец карточки ${props.card.owner}`)
     console.log(`Текущий пользователь ${currentUser._id}`)
-    console.log(`Лайки пользователей ${props.card.likes}`)
+    console.log(`Лайки пользователей ${props.card.likes}`)*/
   }
 
   function handleDeleteClick() {    

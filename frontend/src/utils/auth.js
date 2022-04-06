@@ -1,5 +1,5 @@
 const BASE_URL = process.env.REACT_APP_BASE_URL  ||  'http://localhost:3000';
-//const BASE_URL ='https://api.krasnovid.students.nomoredomains.work' ||  'http://localhost:3000';
+// const BASE_URL ='https://api.krasnovid.students.nomoredomains.work' ||  'http://localhost:3000';
 
 export function register({ password, email }) {
     return fetch(`${BASE_URL}/signup`, {

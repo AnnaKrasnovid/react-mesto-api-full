@@ -44,7 +44,7 @@ function App() {
         setLoggedIn(true);
         history.push("/main");
         setUserEmail(data.email)
-        console.log(res.token)
+        // console.log(res.token)
       })
       .catch(err => {
         setInfoTooltipOpen(true)
@@ -98,7 +98,7 @@ function App() {
       .then(([userData, cards]) => {
         setCurrentUser(userData)
         setCards(cards)
-        console.log(cards)
+        //console.log(cards)
       })
       .catch(err => { console.log(err) })
     }
