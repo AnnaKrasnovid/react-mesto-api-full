@@ -13,7 +13,6 @@ const checkEmail = Joi.string().required().email();
 const checkUserCreate = celebrate({
   body: Joi.object().keys({
     email: checkEmail,
-    password: Joi.string().required().min(8),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
     avatar: checkLink,
