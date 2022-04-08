@@ -16,7 +16,7 @@
 * просмотр фотографии в полноэкранном режиме
 
 ## Используемые технологии:
-Frontend:
+Frontend:  
 * HTML
 * CSS
 * React.js
@@ -24,8 +24,8 @@ Frontend:
 * Grid Layout
 * Файловая структура по методологии БЭМ, Nested
 * Медиазапросы
-* Webpack
-Backend:
+* Webpack  
+Backend:  
 * Node.js
 * Express.js
 * MongoDB
