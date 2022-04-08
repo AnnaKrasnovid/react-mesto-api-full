@@ -1,6 +1,6 @@
 # Проектная работа "Mesto" 
 Написана в рамках обучения на курсе веб-разработчик [Яндекс-практикума](https://practicum.yandex.ru/profile/web/), 10-15 спринты.
-#### ### [Ссылка на проект](https://krasnovid.students.nomoredomains.work)
+#### [Ссылка на проект](https://krasnovid.students.nomoredomains.work)
 
 ## Описание:
 **Mesto** -это  интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.  
