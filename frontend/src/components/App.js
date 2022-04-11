@@ -92,15 +92,17 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn){
-       api.getProfileInfo(token)
+      const token = localStorage.getItem('token');
+      api.getProfileInfo(token)
         .then((userData) => {
           setCurrentUser(userData)
         })
         .catch(err => { console.log(err) })
     }
-  }, [loggedIn, token])
+  }, [loggedIn])
 
   React.useEffect(() => {
+    const token = localStorage.getItem('token');
     if (loggedIn){
       api.getInitialCards(token)
         .then((cards) => {
@@ -108,7 +110,7 @@ function App() {
         })
         .catch(err => { console.log(err) })
     }
-  }, [loggedIn, cards, token])
+  }, [loggedIn, cards])
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true)
