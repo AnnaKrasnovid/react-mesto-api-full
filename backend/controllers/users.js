@@ -9,7 +9,7 @@ const ErrorValidation = require('../error/ErrorValidation');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send(users)) // { data: users }
+    .then((users) => res.send(users))
     .catch((err) => {
       next(err);
     });
@@ -47,7 +47,7 @@ module.exports.getUsersId = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь не найден');
     })
-    .then((user) => res.send(user)) // { data: user }
+    .then((user) => res.send(user))
     .catch((err) => {
       next(err);
     });
@@ -59,7 +59,7 @@ module.exports.updateUserInfo = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь с таким id не найден');
     })
-    .then((users) => res.send(users)) // { data: users }
+    .then((users) => res.send(users))
     .catch((err) => {
       next(err);
     });
@@ -71,7 +71,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь с таким id не найден');
     })
-    .then((users) => res.send(users)) // { data: users }
+    .then((users) => res.send(users))
     .catch((err) => {
       next(err);
     });
@@ -83,7 +83,7 @@ module.exports.login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' }); /* 'some-secret-key' */
-      console.log(JWT_SECRET);
+      // console.log(JWT_SECRET);
       res.send({ token });
     })
     .catch((err) => {
@@ -96,7 +96,7 @@ module.exports.getCurrentUsers = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Пользователь не найден');
     })
-    .then((user) => res.send(user)) // { data: user }
+    .then((user) => res.send(user))
     .catch((err) => {
       next(err);
     });

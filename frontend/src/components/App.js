@@ -44,7 +44,6 @@ function App() {
         setLoggedIn(true);
         history.push("/main");
         setUserEmail(data.email)
-        // console.log(res.token)
       })
       .catch(err => {
         setInfoTooltipOpen(true)
@@ -93,16 +92,23 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn){
-      const token = localStorage.getItem('token');
-       Promise.all([api.getProfileInfo(token), api.getInitialCards(token)])
-      .then(([userData, cards]) => {
-        setCurrentUser(userData)
-        setCards(cards)
-        //console.log(cards)
-      })
-      .catch(err => { console.log(err) })
+       api.getProfileInfo(token)
+        .then((userData) => {
+          setCurrentUser(userData)
+        })
+        .catch(err => { console.log(err) })
     }
-  }, [loggedIn])
+  }, [loggedIn, token])
+
+  React.useEffect(() => {
+    if (loggedIn){
+      api.getInitialCards(token)
+        .then((cards) => {
+          setCards(cards)
+        })
+        .catch(err => { console.log(err) })
+    }
+  }, [loggedIn, cards, token])
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true)
