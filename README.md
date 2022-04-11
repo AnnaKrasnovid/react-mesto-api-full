@@ -30,3 +30,25 @@
 * Mongoose
 * Celebrate
 * Winston 
+
+## Инструкция по установке:
+Клонируем репозиторий:  
+```
+git clone https://github.com/AnnaKrasnovid/react-mesto-api-full
+```  
+Переходим в папку проекта:  
+```
+cd react-mesto-api-full
+```  
+Устанавливаем зависимости в папки `backend/` и `frontend/`:  
+```
+npm install
+```  
+Запускаем проект на локальном сервере `backend/`:  
+```
+npm run dev
+```  
+Запускаем проект на локальном сервере `frontend/`:  
+```
+npm start
+```  
