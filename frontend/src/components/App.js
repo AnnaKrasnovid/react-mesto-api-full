@@ -90,27 +90,40 @@ function App() {
     setUserEmail('')
   }
 
-  React.useEffect(() => {
-    if (loggedIn){
+  /*React.useEffect(() => {
+    //if (loggedIn){
       const token = localStorage.getItem('token');
       api.getProfileInfo(token)
         .then((userData) => {
           setCurrentUser(userData)
         })
         .catch(err => { console.log(err) })
-    }
+    //}
   }, [loggedIn])
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-    if (loggedIn){
+   // if (loggedIn){
       api.getInitialCards(token)
         .then((cards) => {
           setCards(cards)
         })
         .catch(err => { console.log(err) })
+    //}
+  }, [loggedIn])*/
+
+  React.useEffect(() => {
+    if (loggedIn){
+      const token = localStorage.getItem('token');
+       Promise.all([api.getProfileInfo(token), api.getInitialCards(token)])
+      .then(([userData, cards]) => {
+        setCurrentUser(userData)
+        setCards(cards)
+        //console.log(cards)
+      })
+      .catch(err => { console.log(err) })
     }
-  }, [loggedIn, cards])
+  }, [loggedIn])
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true)
@@ -168,6 +181,19 @@ function App() {
       })
   }
 
+  function handleAddPlaceSubmit(newCard) {
+    setIsLoading(true)
+    api.setNewCard(newCard, token)
+      .then((newCard) => {
+        setCards([newCard, ...cards])
+        closeAllPopups()
+      })
+      .catch(err => { console.log(err) })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }
+
   function handleCardDelete(e) { 
     e.preventDefault();
     api.removeCard(cardDelete, token)
@@ -186,20 +212,7 @@ function App() {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
       .catch(err => { console.log(err) })
-  }
-
-  function handleAddPlaceSubmit(newCard) {
-    setIsLoading(true)
-    api.setNewCard(newCard, token)
-      .then((newCard) => {
-        setCards([newCard, ...cards])
-        closeAllPopups()
-      })
-      .catch(err => { console.log(err) })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
+  } 
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
